@@ -1,0 +1,19 @@
+<form action="{% url 'register' %}" method="post">
+    {% csrf_token %}
+    <div>
+        <h2>Ro'yxatdan o'tish</h2>
+        <label for="phone">Telefon raqam</label>
+        <input type="text" name="phone" pattern=".{13,}" minlength="13" value="+998" placeholder="+998900000000" required>
+        <label for="name">Ismingiz</label>
+        <input type="text" name="name" placeholder="Falonchiyev Pistonchi">
+        <button type="submit" class="btn btn-tasdiqlash">Ro'yxatdan o'tish</button>
+    </div>
+    {% if messages %}
+        {% for message in messages %}
+         <center>
+            <p style="color:green;">{{message}}</p>
+            <br>
+         </center>
+        {% endfor %}
+    {% endif %}
+</form>

@@ -1,0 +1,7 @@
+.env
+db.sqlite3
+venv/
+db.sqlite3-journal
+staticfiles/
+test/
+__pycache__/

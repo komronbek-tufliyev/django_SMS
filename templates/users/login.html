@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        {% if page == 'login' %}
+            Login
+        {% elif page == 'register' %}
+            Register
+        {% endif %}
+    </title>
+</head>
+<body>
+
+    <nav class="navbar">
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/login">Login</a></li>
+            <li><a href="/register">Register</a></li>
+        </ul>
+    </nav>
+
+    <header>
+        <h1>
+            {% if page == 'login' %}
+                Login
+            {% elif page == 'register' %}
+                Register
+            {% else %}
+                Confirm
+            {% endif %}
+        </h1>
+    </header>
+
+    <main>
+        <div class="container">
+            {% if page == 'login' %}
+                {% include 'users/sections/login.html'   %}
+            {% elif page == 'confirm' %}
+                {% include 'users/sections/confirm.html' %}
+            {% else %}  
+                {% include 'users/sections/register.html' %}
+            {% endif %}
+        </div>
+    
+    </main>    
+</body>
+</html>
