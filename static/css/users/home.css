@@ -1,0 +1,11 @@
+.isuser{
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    display: flex;
+    font-size: 36px;
+    width: 100%;
+    height: calc(100vh - 100px);
+    /* height: 100vh; */
+    color: #5976f7;
+}

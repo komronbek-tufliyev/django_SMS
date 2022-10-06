@@ -1,16 +1,20 @@
+{% load static %}
+
+<link rel="stylesheet" href="{% static 'css/users/sections/confirm.css' %}">
+
 <form action="{% url 'confirm' %}" method="post">
     {% csrf_token %}
 
-    <div>
-        <h2>Tasdiqlash kodini kiriting</h2>
-        <input type="text" name="code" placeholder="Tasdiqlash kodini kiriting" required>
-        <button type="submit" class="btn btn-tasdiqlash">Tasdiqlash</button>
-        <p>Kirish uchun sizga sms xabar yuborilgan</p>
-    </div>
+    <!-- <div class=""> -->
+    <h2>Tasdiqlash kodini kiriting</h2>
+    <input type="number" name="code" placeholder="Tasdiqlash kodini kiriting" required>
+    <button type="submit" class="btn btn-tasdiqlash">Tasdiqlash</button>
+    <p class="info">Kirish uchun sizga sms xabar yuborilgan</p>
+    <!-- </div> -->
     {% if messages %}
         {% for message in messages %}
          <center>
-            <p style="color:blue;">{{message}}</p>
+            <p style="color:#fff; background: blue; padding: 10px; width: 100%;">{{message}}</p>
             <br>
          </center>
         {% endfor %}

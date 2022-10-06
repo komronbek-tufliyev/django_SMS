@@ -1,3 +1,7 @@
+{% load static %}
+
+<link rel="stylesheet" href="{% static 'css/users/sections/register.css' %}">
+
 <form action="{% url 'register' %}" method="post">
     {% csrf_token %}
     <div>
@@ -6,12 +10,12 @@
         <input type="text" name="phone" pattern=".{13,}" minlength="13" value="+998" placeholder="+998900000000" required>
         <label for="name">Ismingiz</label>
         <input type="text" name="name" placeholder="Falonchiyev Pistonchi">
-        <button type="submit" class="btn btn-tasdiqlash">Ro'yxatdan o'tish</button>
+        <button type="submit" class="btn btn-kirish">Ro'yxatdan o'tish</button>
     </div>
     {% if messages %}
         {% for message in messages %}
          <center>
-            <p style="color:green;">{{message}}</p>
+            <p style="color:#333; padding:10px; background: green; width: 100%;">{{message}}</p>
             <br>
          </center>
         {% endfor %}

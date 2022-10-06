@@ -120,7 +120,7 @@ LOGGING = {
 
     'handlers': {
         'file': {
-            'filename': LOGFILE_PATH + 'alsafia.log',
+            'filename': LOGFILE_PATH + 'sms_auth.log',
             'class': 'logging.handlers.RotatingFileHandler',
             'maxBytes': 20 * 1024 * 1024,
             'backupCount': 5,

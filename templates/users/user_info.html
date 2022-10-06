@@ -1,0 +1,32 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{% static 'css/users/user_info.css' %}">
+</head>
+<body>
+    
+    <nav class="navbar">
+        <ul>
+            <li><a href="/my-account/">Login</a></li>
+            <li><a href="/my-account/register/">Register</a></li>
+            <li><a href="/my-account//logout/">Log out</a></li>
+        </ul>
+    </nav>
+
+    <main class="container">
+        {% if user %}
+            <h2 class="user">Full name: {{user.full_name}}</h2>
+            <p class="phone">Phone: {{user.phone}}</p>
+            <p class="is_verified">Is_verified: {{user.is_verified}}</p>
+            <p class="is_authenticated">Is authenticated: {{user.is_authenticated}}</p>
+            {# <p class="info"></p> #}
+        {% endif %}
+    </main>
+
+</body>
+</html>

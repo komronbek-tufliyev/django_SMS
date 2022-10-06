@@ -47,7 +47,9 @@ class SMSClient:
         }
 
         try: 
-            return request(**context).json()
+            resp = request(**context).json()
+            # print(resp)
+            return resp
         except Exception as e:
             err: str = self.__ERROR_WITH_ESKIZ_PROCESSING.format(
                 context['url'], context['data'], e
@@ -66,8 +68,12 @@ class SMSClient:
             'api_path': self.__AUTH_LOGIN,
         }
         token: str = self.__request(**context).get('data')['token']
-        sms_model.objects.get_or_create(token=token)
-
+        
+        try:
+            sms_model.objects.get_or_create(token=token)
+            print('token created')
+        except Exception as e:
+            print(self.__AUTH_TOKEN_ERROR, e)
         return self.__request(**context)
 
     def _refresh_token(self) -> dict:
@@ -143,13 +149,15 @@ class SMSClient:
 
         return resp
 
-    
     def get_sms_client_token(self) -> str:
         try:
-            token: str = sms_model.objects.only('token').last().token
-
-        except Exception as e:
             self._auth()
+            token: str = sms_model.objects.filter().first().token
+            print('token getted')
+            print(token)
+        except Exception as e:
+            print(e)
+            # self._auth()
 
         return token
 

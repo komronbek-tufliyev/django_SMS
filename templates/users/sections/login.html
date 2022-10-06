@@ -1,18 +1,27 @@
 
+{% load static %}
 
+<link rel="stylesheet" href="{% static 'css/users/sections/login.css' %}">
+ 
 <form action="{% url 'my-account' %}" method="post">
     {% csrf_token %}
+    <label for="phone">Telefon raqami: </label>
     <input type="text" name="phone" pattern=".{13,}" minlength="13" value="+998" placeholder="+998900000000" required>
+    <label for="name">Ismingiz: </label>
     <input type="text" name="name" placeholder="Falonchiyev Pistonchi">
     <button type="submit" class="btn btn-kirish">Kirish</button>
-
+    
     {% if messages %}
-        {% for message in messages %}
-         <center>
-            <p style="color:red;">{{message}}</p>
-            <br>
-         </center>
-        {% endfor %}
+    {% for message in messages %}
+    <center>
+        <p style="color: #fff; background: red; padding: 10px; width: 100%">{{message}} 
+            
+            <a href="{% url 'register' %}">qib qaytadan kirish</a>
+           
+        </p>
+        <br>
+    </center>
+    {% endfor %}
     {% endif %}
-
+    
 </form>

@@ -43,6 +43,9 @@ class SMSClient(models.Model):
 
     token = models.CharField(max_length=10000, blank=False, null=True)
 
+    def __str__(self) -> str:
+        return self.token
+
 class SMSToken(models.Model):
     name = models.CharField(max_length=150)
     token = models.CharField(max_length=150)

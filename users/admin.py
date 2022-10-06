@@ -181,3 +181,8 @@ class SMSTokenAdmin(admin.ModelAdmin):
         ),
     )
 
+
+@admin.register(SMSClient)
+class SMSClientAdmin(admin.ModelAdmin):
+    list_display = ['token']
+

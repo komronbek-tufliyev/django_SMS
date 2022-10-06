@@ -1,3 +1,5 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,19 +7,36 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    <link rel="stylesheet" href="{% static 'css/users/home.css' %}">
 </head>
 <body>
+
+    <nav class="navbar">
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/my-account/">Login</a></li>
+            <li><a href="/my-account/register/">Register</a></li>
+            {% if user.is_authentiicated and user.is_verified %}
+            <a href="/my-account/logout/">Log out</a>
+            
+        {% endif %}
+        </ul>
+    </nav>
+
     
     <main>
         <div class="container">
-            <h1>Hey You are in Home Page</h1>
-            {% if user %}
-                {% if user.is_authenticated and user.name%}
-                    <h1>Hey {{user.name}} You are in Home Page</h1>
-                {% else %}
-                    <h1>Hey You are in Home Page</h1>
+            {# <h1>Hey You are in Home Page</h1> #}
+            <div class="isuser">
+                {% if user %}
+                    {% if user.is_authenticated and user.name%}
+                        <h1>Hey {{user.phone}}. You are in Home Page</h1>
+                    {% else %}
+                        <h1>Hey You are in Home Page</h1>
+                    {% endif %}
                 {% endif %}
-            {% endif %}
+            </div>
         </div>
     </main>
 
