@@ -17,9 +17,8 @@
             <li><a href="/">Home</a></li>
             <li><a href="/my-account/">Login</a></li>
             <li><a href="/my-account/register/">Register</a></li>
-            {% if user.is_authentiicated and user.is_verified %}
-            <a href="/my-account/logout/">Log out</a>
-            
+            {% if user.is_authenticated and user.is_verified %}
+            <li><a href="/my-account/logout/">Log out</a></li>
         {% endif %}
         </ul>
     </nav>
@@ -30,8 +29,8 @@
             {# <h1>Hey You are in Home Page</h1> #}
             <div class="isuser">
                 {% if user %}
-                    {% if user.is_authenticated and user.name%}
-                        <h1>Hey {{user.phone}}. You are in Home Page</h1>
+                    {% if user.is_authenticated and user.is_verified %}
+                        <h1>Hey <span style="color: blue; font-style: italic; text-decoration: underline; font-size: 36px;">{{user.full_name}}</span>. <br> You are in Home Page</h1>
                     {% else %}
                         <h1>Hey You are in Home Page</h1>
                     {% endif %}

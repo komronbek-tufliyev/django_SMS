@@ -22,23 +22,31 @@ logger = logging.getLogger(__name__)
 def homeView(request) -> dict:
     """This method is about home page"""
     if not request.user.is_authenticated:
+        print("User is not authenticated and redirecting from homeView to loginView")
         return redirect('my-account')
-
-    return render(request, 'users/home.html')
+    print("User is authenticated and verified from home view")
+    context: dict = {
+        'user': request.user,
+    }
+    # print(context)
+    return render(request, 'users/home.html', context)
 
 
 def loginView(request) -> dict:
+    print("This is loginView")
     """ This method is about login/logout"""
     if request.user.is_authenticated and request.user.is_verified:
+        print("User is authenticated and verified from login view")
         return redirect('home')
 
-    page: str = 'my-account'
+    page: str = 'login'
     code: str = generate_code()
     user: User = None 
 
     if request.method == 'POST':
+        print("This is POST method")
         phone = request.POST.get('phone').replace('+', '')
-        print(phone)
+        print("Phone: ", phone)
 
         try:
             with transaction.atomic():
@@ -54,21 +62,26 @@ def loginView(request) -> dict:
                     } 
 
                     login(**context)
+                    print("login(**context) is called")
 
                     return redirect('confirm')
-
+                else:
+                    logger.error("User does not exist and redirecting to register page")
+                    messages.error(request, 'User does not exist')
+                    print("User does not exist and redirecting to register page")
         except User.DoesNotExist:
             page: str = 'register'
 
     context: dict = {
         'page': page,
     }
-
+    print(context)
     return render(request, 'users/login.html', context)
 
 
 def registerView(request) -> dict:
     if request.user.is_authenticated and request.user.is_verified:
+        print("User is authenticated and verified from register view")
         return redirect('home')
 
     if request.method == 'POST':
@@ -141,7 +154,9 @@ def verifyView(request) -> None:
     print(f"Checked: {checked}")
     try:
         if checked:
-            user: User = User.objects.get(id=request.user.id, is_deleted=False)
+            user_id = request.user.id
+            print(f"User id: {user_id}")
+            user: User = User.objects.get(pk=request.user.id, is_deleted=False)
             if user:
                 user.is_verified = True
                 user.is_authenticated = True
@@ -166,7 +181,7 @@ def verifyView(request) -> None:
             )
             user.is_verified = True
             user.save()
-
+            print(user.is_verified, user.full_name)
             if user is not None and user.is_verified:
                 messages.success(request, f"Xush kelibsiz {user.full_name}")
                 login(request, user)
@@ -176,7 +191,7 @@ def verifyView(request) -> None:
             error: str = "Tasdiqlash kodini noto'g'ri kiritdingiz"
             logger.error(f"Error during user verification: {error}")
             messages.error(request, 'User not found in database')
-            return redirect('my-account')
+            # return redirect('my-account')
 
     
 

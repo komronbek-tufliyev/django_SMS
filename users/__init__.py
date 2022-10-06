@@ -13,6 +13,7 @@ from users.redis import redis
 
 
 def login(request, user, backend=None, code: str=None) -> None:
+    print("This is login method")
     """This method helps to user login with session"""
     session_auth_hash: str = ''
     if user is None:
@@ -59,6 +60,7 @@ def login(request, user, backend=None, code: str=None) -> None:
     request.session[HASH_SESSION_KEY] = session_auth_hash
     if not request.session.session_key:
         request.session.create()
+        print("Session key created in __init__/login")
     
     session_id = request.session.session_key
     redis._set_verify_code(session_id, code)

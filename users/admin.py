@@ -12,6 +12,7 @@ from .models import (
 class UserAdmin(admin.ModelAdmin):
     list_display = (
         'phone',
+        'id',
         'full_name',
         'is_verified',
         'is_deleted',

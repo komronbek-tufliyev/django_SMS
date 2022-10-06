@@ -110,7 +110,7 @@ LOGFILE_PATH = './'
 LOG_LEVEL = env.str('LOG_LEVEL', default='ERROR')
 
 LOGGING = {
-        'version': 1,
+    'version': 1,
     'disable_existing_loggers': False,
     'formatters': {
         'standard': {
@@ -163,7 +163,7 @@ CACHES = {
         'BACKEND': 'django_redis.cache.RedisCache',
         'LOCATION': env.str('REDIS_URL'),
         'OPTIONS': {
-            'CLIENT_CLASS': 'django_redis.client.DefaultClient',
+            'CLIENT_CLASS': 'django_redis.cache.RedisCache',
         }
     }        
 }
@@ -224,3 +224,6 @@ AUTH_USER_MODEL = 'users.User'
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+LOGIN_REDIRECT_URL = 'home'
+LOGOUT_REDIRECT_URL = 'home'
